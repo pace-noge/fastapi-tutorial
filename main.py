@@ -36,9 +36,10 @@ async def read_item(
     *, item_id: int = Path(
         ...,
         title="The ID of the item to get",
-        gt=0, le=1000
+        ge=1, le=1000
     ),
-    q: str
+    q: str,
+    size: float = Query(..., ge=0, le=10.5)
 ):
     item = {"item_id": item_id}
     if q:
