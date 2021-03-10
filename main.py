@@ -11,6 +11,11 @@ class Item(BaseModel):
     tax: Optional[float] = None
 
 
+class User(BaseModel):
+    username: str
+    full_name: Optional[str] = None
+
+
 class ModelName(str, Enum):
     alexnet = "alexnet"
     resnet = "resnet"
@@ -114,16 +119,7 @@ async def create_item(item_id: int, item: Item, q: Optional[str] = None):
     return result
 
 @app.put('/items/{item_id}')
-async def update_item(
-    *,
-    item_id: int = Path(..., title='The ID of the item to get', ge=0, le=1000),
-    q: Optional[str] = None,
-    item: Optional[Item] = None
-):
-    results = {"item_id": item_id}
-    if q:
-        results.update({"q": q})
-    if item:
-        results.update({"item": item})
+async def update_item(item_id: int, item: Item, user: User):
+    results = {"item_id": item_id, "item": item, "user": user}
     return results
 
