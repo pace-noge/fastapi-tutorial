@@ -46,7 +46,7 @@ async def read_item(item_id: str, q: Optional[str] = None, short: bool = False):
 
 
 @app.get("/items/")
-async def read_items(q: Optional[List[str]] = Query(None)):
+async def read_items(q: List[str] = Query(["foo", "bar"])):
     results = {"items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
     if q:
         results.update({"q": q})
