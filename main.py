@@ -49,9 +49,7 @@ async def read_item(item_id: str, q: Optional[str] = None, short: bool = False):
 async def read_items(
     q: Optional[str] = Query(
         None,
-        title="Query String",
-        description="Query String for the items to search in the database that have a good match",
-        min_length=3
+        alias="item-query",
     )
 ):
     results = {"items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
