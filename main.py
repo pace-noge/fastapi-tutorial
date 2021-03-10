@@ -120,8 +120,15 @@ async def create_item(item_id: int, item: Item, q: Optional[str] = None):
 
 @app.put('/items/{item_id}')
 async def update_item(
-    item_id: int, item: Item, user: User, importance: int=Body(...)
+    *,
+    item_id: int,
+    item: Item,
+    user: User,
+    importance: int=Body(..., ge=1),
+    q: Optional[str] = None
 ):
     results = {"item_id": item_id, "item": item, "user": user, "body": body}
+    if q:
+        results.update({"q": q})
     return results
 
