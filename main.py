@@ -122,10 +122,7 @@ async def create_item(item_id: int, item: Item, q: Optional[str] = None):
 async def update_item(
     *,
     item_id: int,
-    item: Item,
-    user: User,
-    importance: int=Body(..., ge=1),
-    q: Optional[str] = None
+    item: Item = Body(..., embed=True),
 ):
     results = {"item_id": item_id, "item": item, "user": user, "body": body}
     if q:
