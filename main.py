@@ -119,7 +119,8 @@ async def create_item(item_id: int, item: Item, q: Optional[str] = None):
     return result
 
 @app.put('/items/{item_id}')
-async def update_item(item_id: int, item: Item, user: User):
+async def update_item(item_id: int, item: Item, user: User, importance:
+                      int=Body(...)):
     results = {"item_id": item_id, "item": item, "user": user}
     return results
 
