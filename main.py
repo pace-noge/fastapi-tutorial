@@ -119,14 +119,7 @@ async def create_item(item_id: int, item: Item, q: Optional[str] = None):
     return result
 
 @app.put('/items/{item_id}')
-async def update_item(
-    *,
-    item_id: int = Path(..., title="The ID of the item to get", ge=0, le=1000),
-    item: Optional[Item] = None,
-    q: Optional[str] = None
-):
-    results = {"item_id": item_id}
-    if q:
-        results.update({"q": q})
+async def update_item(item_id: int, item: Item, user: User):
+    results = {"item_id": item_id, "item": item, "user": user}
     return results
 
